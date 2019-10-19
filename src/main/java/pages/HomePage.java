@@ -1,38 +1,58 @@
 package pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.Set;
+import java.util.List;
 
 public class HomePage extends BasePage {
 
     @FindBy(linkText = "Hotels")
-    public WebElement hotelLink;
+    private WebElement hotelLink;
 
     @FindBy(linkText = "Your trips")
-    public WebElement trips;
+    private WebElement trips;
 
     @FindBy(id = "SignIn")
-    public WebElement signIn;
+    private WebElement signIn;
 
-//    @FindBy(id = "signInButton")
-    @FindBy(xpath = "//div[@id='Wrapper']//*[@id='signInButton']")
-    public WebElement signInBtn;
+    @FindBy(id = "signInButton")
+    private WebElement signInBtn;
 
     @FindBy(id = "errors1")
-    public WebElement signInError;
+    private WebElement signInError;
+
+    @FindBy(id = "OneWay")
+    private WebElement oneWay;
+
+    @FindBy(id = "FromTag")
+    private WebElement origin;
+
+    @FindBy(id = "ToTag")
+    private WebElement destination;
+
+    @FindBy(xpath = "//ul[@class='autoComplete' and @id='ui-id-1']/li")
+    private List<WebElement> originSuggestions;
+
+    @FindBy(xpath = "//ul[@class='autoComplete' and @id='ui-id-2']/li")
+    private List<WebElement> destinationSuggestions;
+
+    @FindBy(id = "DepartDate")
+    private WebElement departureDate;
+
+    @FindBy(id = "SearchBtn")
+    private WebElement searchFlightsBtn;
+
+    @FindBy(className = "searchSummary")
+    private WebElement searchResult;
+
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
         driver = webDriver;
         webDriver.get("https://www.cleartrip.com/");
-        webDriver.manage().window().maximize();
     }
 
     public HotelBookingPage goToHotels() {
@@ -51,5 +71,40 @@ public class HomePage extends BasePage {
         wait.until( ExpectedConditions.elementToBeClickable(signInBtn) );
         signInBtn.click();
         return signInError.getText();
+    }
+
+    public void selectRouteOption() {
+        oneWay.click();
+    }
+
+    public void enterOriginPlace(String originText) {
+
+        origin.clear();
+        origin.sendKeys( originText );
+        wait.until( ExpectedConditions.visibilityOfAllElements( originSuggestions ));
+        originSuggestions.get( 0 ).click();
+
+    }
+
+    public void enterDestination(String destinationText) {
+
+        destination.clear();
+        destination.sendKeys( destinationText );
+        wait.until( ExpectedConditions.visibilityOfAllElements( destinationSuggestions ));
+        destinationSuggestions.get( 0 ).click();
+    }
+
+    public void departOn(String date) {
+        departureDate.sendKeys( date );
+
+    }
+
+    public void searchFlights() {
+        searchFlightsBtn.click();
+    }
+
+    public boolean searchSummaryPresent() {
+        wait.until( ExpectedConditions.visibilityOf( searchResult ) );
+        return isElementPresent( searchResult );
     }
 }

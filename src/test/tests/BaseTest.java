@@ -5,9 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseTest {
 
@@ -25,7 +29,12 @@ public class BaseTest {
         if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
-        driver = new ChromeDriver();
+        ChromeOptions co = new ChromeOptions();
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.default_content_setting_values.notifications", 2);
+        co.setExperimentalOption("prefs", prefs);
+        co.addArguments("--start-maximized");
+        driver = new ChromeDriver(co);
     }
 
     public BaseTest() {
