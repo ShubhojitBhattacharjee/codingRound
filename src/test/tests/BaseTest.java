@@ -5,10 +5,12 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import pages.HomePage;
 import reports.Logs;
 import webdriver.WebDriverSetup;
 
@@ -20,12 +22,15 @@ import java.util.Date;
 public class BaseTest {
 
     protected WebDriver driver;
+    protected HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
     protected void setUp(@Optional("CH") String browser) {
 
-        driver = WebDriverSetup.getWebDriver(browser);
+        driver = WebDriverSetup.setWebDriver(browser);
+
+        homePage = new HomePage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -56,6 +61,11 @@ public class BaseTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void reportLogger(String message) {
+        Logs.info(message);
+        Reporter.log(message);
     }
 
 }

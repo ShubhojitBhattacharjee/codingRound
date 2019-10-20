@@ -18,16 +18,8 @@ public class WebDriverSetup {
 	
 	private static final String LIB_DIR = System.getProperty("user.dir")
 			+ File.separator + "lib" + File.separator;
-//	private static WebDriver driver;
 
-	/*public static WebDriver getDriver() {
-		if (driver != null)
-			return driver;
-		else
-			return null;
-	}*/
-
-	public static WebDriver getWebDriver(String browserName) {
+	public static WebDriver setWebDriver(String browserName) {
 		WebDriver driver;
 		if ("CH".equals(browserName)) {
 			driver = getChromeDriver();

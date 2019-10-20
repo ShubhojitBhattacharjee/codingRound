@@ -57,3 +57,8 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+
+##########################
+## Log Files
+##########################
+*.log
