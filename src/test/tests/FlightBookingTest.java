@@ -18,7 +18,8 @@ public class FlightBookingTest extends BaseTest {
         homePage.departOn("Sun, 27 Oct, 2019");
         homePage.searchFlights();
 
-        Assert.assertTrue(homePage.searchSummaryPresent());
+        Assert.assertTrue(homePage.searchSummaryPresent(),
+                "Search Summary Page not displayed");
 
     }
 }

@@ -13,7 +13,8 @@ public class SignInTest extends BaseTest {
 
         String errorMessage = homePage.invalidSignIn();
 
-        Assert.assertTrue(errorMessage.contains("There were errors in your submission"));
+        Assert.assertTrue(errorMessage.contains("There were errors in your submission"),
+                "Error message do not match");
     }
 
 }

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Bookings" parallel="classes">
-  <test thread-count="5" name="FlightHotelBookings">
+<suite name="Trip" parallel="classes">
+
+  <listeners>
+    <listener
+            class-name="reports.ExtentReport" />
+  </listeners>
+
+  <test thread-count="3" name="Bookings">
     <parameter name="browser" value="CH" />
     <classes>
       <class name="tests.HotelBookingTest"/>
       <class name="tests.FlightBookingTest"/>
       <class name="tests.SignInTest"/>
     </classes>
-  </test> <!-- FlightHotelBookings -->
-</suite> <!-- Bookings -->
+  </test> <!-- Bookings -->
+</suite> <!-- Trip -->
