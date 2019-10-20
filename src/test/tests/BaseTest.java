@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import reports.Logs;
 import webdriver.WebDriverSetup;
@@ -22,7 +23,7 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
-    protected void setUp(String browser) {
+    protected void setUp(@Optional("CH") String browser) {
 
         driver = WebDriverSetup.getWebDriver(browser);
     }

@@ -77,10 +77,10 @@ public class HomePage extends BasePage {
         oneWay.click();
     }
 
-    public void enterOriginPlace(String originText) {
+    public void enterOriginPlace(String originValue) {
 
         origin.clear();
-        origin.sendKeys( originText );
+        origin.sendKeys( originValue );
         wait.until( ExpectedConditions.visibilityOfAllElements( originSuggestions ));
         originSuggestions.get( 0 ).click();
 

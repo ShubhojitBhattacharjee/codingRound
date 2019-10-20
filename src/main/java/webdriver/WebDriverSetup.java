@@ -10,13 +10,22 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WebDriverSetup {
 	
-	private static final String LIB_DIR = System.getProperty("user.dir") + "\\src\\lib\\webdrivers\\";
+	private static final String LIB_DIR = System.getProperty("user.dir")
+			+ File.separator + "lib" + File.separator;
+//	private static WebDriver driver;
 
+	/*public static WebDriver getDriver() {
+		if (driver != null)
+			return driver;
+		else
+			return null;
+	}*/
 
 	public static WebDriver getWebDriver(String browserName) {
 		WebDriver driver;
@@ -37,7 +46,7 @@ public class WebDriverSetup {
 			System.setProperty("webdriver.chrome.driver", "chromedriver");
 		}
 		if (PlatformUtil.isWindows()) {
-			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", LIB_DIR + "chromedriver.exe");
 		}
 		if (PlatformUtil.isLinux()) {
 			System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
@@ -52,15 +61,17 @@ public class WebDriverSetup {
 	}
 	
 	private static WebDriver getFirefoxDriver() {
-		
-		System.setProperty("webdriver.gecko.driver", LIB_DIR + "geckodriver.exe");
-
+		if (PlatformUtil.isWindows()) {
+			System.setProperty( "webdriver.gecko.driver", LIB_DIR + "geckodriver.exe" );
+		}
 		return new FirefoxDriver();
 	}
 
 	private static WebDriver getInternetExplorerDriver() {
 		try {
-			System.setProperty("webdriver.ie.driver", LIB_DIR + "IEDriverServer.exe");
+			if (PlatformUtil.isWindows()) {
+				System.setProperty( "webdriver.ie.driver", LIB_DIR + "IEDriverServer.exe" );
+			}
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability("nativeEvents", false);
 			capabilities.setCapability( InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
