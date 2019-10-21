@@ -49,7 +49,6 @@ public class BaseTest {
     private void captureScreenshot(WebDriver driver) {
 
         String timestamp = new SimpleDateFormat("MM_dd_yyyy_hh_mm_ss").format(new Date());
-//        System.out.println(timestamp + " | " + result.getMethod());
         TakesScreenshot ts = (TakesScreenshot)driver;
         File source = ts.getScreenshotAs( OutputType.FILE);
         String screenshotPath = System.getProperty("user.dir") +  File.separator + "test-output" + File.separator
