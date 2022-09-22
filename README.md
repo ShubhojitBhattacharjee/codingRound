@@ -1,4 +1,4 @@
-# TestVagrant hiring challenge for applicants 
+# TestVagrant challenge
 
 About the codebase:
 ---------------------------------
